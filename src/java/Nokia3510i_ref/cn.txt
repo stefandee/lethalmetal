@@ -1,0 +1,4 @@
+this version is stable and is quite perfect from an architectural p.o.v.
+
+this version is the base for size optimization and class crunching
+(it would be refactoring in the bad sense of words :)

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="src/" path="" kind="src"/>
+	<classpathentry path="src" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"/>
+	<classpathentry path="C:/Nokia/Devices/Nokia_3510i_MIDP_SDK_v1_0/lib/classes.zip" kind="lib"/>
+	<classpathentry path="" kind="output"/>
+</classpath>

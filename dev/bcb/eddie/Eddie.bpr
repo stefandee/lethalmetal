@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="..\..\..\dist\tools\Eddie.exe"/>
+    <OBJFILES value="..\..\..\tmp\obj\eddie\Eddie.obj ..\..\..\tmp\obj\eddie\EditorDef.obj 
+      ..\..\..\tmp\obj\eddie\FMain.obj ..\..\..\tmp\obj\eddie\FName.obj 
+      ..\..\..\tmp\obj\eddie\FPaint.obj ..\..\..\tmp\obj\eddie\FParams.obj 
+      ..\..\..\tmp\obj\eddie\FSize.obj ..\..\..\tmp\obj\eddie\FTileEd.obj 
+      ..\..\..\tmp\obj\eddie\FTool.obj ..\..\..\tmp\obj\eddie\Level.obj 
+      ..\..\..\tmp\obj\eddie\FDrop.obj ..\..\..\tmp\obj\eddie\PropData.obj 
+      ..\..\..\tmp\obj\eddie\Clipboard.obj 
+      ..\..\..\tmp\obj\eddie\MementoLevel.obj 
+      ..\..\..\tmp\obj\eddie\FItemEdit.obj 
+      ..\..\..\tmp\obj\eddie\VerifyLevel.obj ..\..\..\tmp\obj\eddie\VerifyCyberNinjaLevel.obj 
+      ..\..\..\tmp\obj\eddie\FLog.obj ..\..\..\tmp\obj\eddie\FAbout.obj 
+      ..\..\..\tmp\obj\eddie\Cfg.obj ..\..\..\tmp\obj\eddie\CfgTxt.obj 
+      ..\..\..\tmp\obj\eddie\logfile.obj ..\..\..\tmp\obj\eddie\PP_String.obj"/>
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\..\..\src\cpp\eddie\FMain.dfm 
+      ..\..\..\src\cpp\eddie\FName.dfm ..\..\..\src\cpp\eddie\FPaint.dfm 
+      ..\..\..\src\cpp\eddie\FParams.dfm ..\..\..\src\cpp\eddie\FSize.dfm 
+      ..\..\..\src\cpp\eddie\FTileEd.dfm ..\..\..\src\cpp\eddie\FTool.dfm 
+      ..\..\..\src\cpp\eddie\FDrop.dfm ..\..\..\src\cpp\eddie\FItemEdit.dfm 
+      ..\..\..\src\cpp\eddie\FLog.dfm ..\..\..\src\cpp\eddie\FAbout.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="ImageExPakage.lib vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib ImageExPakage.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi vclx.bpi bcbsmp.bpi dbrtl.bpi vcldb.bpi adortl.bpi 
+      ibsmp.bpi bdertl.bpi vcldbx.bpi qrpt.bpi teeui.bpi teedb.bpi tee.bpi 
+      dss.bpi teeqr.bpi ibxpress.bpi dsnap.bpi vclie.bpi inetdb.bpi inet.bpi 
+      nmfast.bpi webdsnap.bpi bcbie.bpi dclocx.bpi bcb2kaxserver.bpi 
+      ScriptPopup.bpi ImageExPakage.bpi PironImgEx.bpi indy.bpi"/>
+    <PATHCPP value=".;..\..\..\src\cpp\eddie;..\..\..\src\cpp\common"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="Eddie.cpp"/>
+    <INCLUDEPATH value="..\..\..\src\cpp\common;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Program Files\Borland\CBuilder5\Projects&quot;;..\..\..\src\cpp\eddie;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\..\src\cpp\common;&quot;C:\Program Files\Borland\CBuilder6\Projects&quot;;&quot;C:\Program Files\Borland\CBuilder5\Projects&quot;;$(BCB)\Projects\Lib;..\..\..\src\cpp\eddie;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\..\src\cpp\common -I&quot;C:\Program Files\Borland\CBuilder6\Projects&quot; 
+      -I&quot;C:\Program Files\Borland\CBuilder5\Projects&quot; -I..\..\..\src\cpp\eddie 
+      -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=c:\PROGRA~1\borland\CBUILD~1\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 
+      -b- -k -y -v -vi- -c -tW -tWM"/>
+    <PFLAGS value="-N2..\..\..\tmp\obj\eddie -N0..\..\..\tmp\obj\eddie -$YD -$W -$O- -$A8 -v 
+      -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-I..\..\..\tmp\obj\eddie -D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Eddie.cpp" FORMNAME="" UNITNAME="Eddie" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\EditorDef.cpp" FORMNAME="" UNITNAME="EditorDef" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FMain.cpp" FORMNAME="Main" UNITNAME="FMain" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FName.cpp" FORMNAME="FormName" UNITNAME="FName" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FPaint.cpp" FORMNAME="FormPaint" UNITNAME="FPaint" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FParams.cpp" FORMNAME="FormParams" UNITNAME="FParams" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FSize.cpp" FORMNAME="FormSize" UNITNAME="FSize" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FTileEd.cpp" FORMNAME="FormTileEd" UNITNAME="FTileEd" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FTool.cpp" FORMNAME="FormTool" UNITNAME="FTool" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\Level.cpp" FORMNAME="" UNITNAME="Level" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FDrop.cpp" FORMNAME="FormDrop" UNITNAME="FDrop" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\PropData.cpp" FORMNAME="" UNITNAME="PropData" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\Clipboard.cpp" FORMNAME="" UNITNAME="Clipboard" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\MementoLevel.cpp" FORMNAME="" UNITNAME="MementoLevel" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FItemEdit.cpp" FORMNAME="FormItemEdit" UNITNAME="FItemEdit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\VerifyLevel.cpp" FORMNAME="" UNITNAME="VerifyLevel" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\VerifyCyberNinjaLevel.cpp" FORMNAME="" UNITNAME="VerifyCyberNinjaLevel" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FLog.cpp" FORMNAME="FormLog" UNITNAME="FLog" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\eddie\FAbout.cpp" FORMNAME="FormAbout" UNITNAME="FAbout" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\common\Cfg.cpp" FORMNAME="" UNITNAME="Cfg.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\common\CfgTxt.cpp" FORMNAME="" UNITNAME="CfgTxt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\common\logfile.cpp" FORMNAME="" UNITNAME="logfile" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\..\src\cpp\common\PP_String.cpp" FORMNAME="" UNITNAME="PP_String" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Excluded Packages]
+c:\program files\borland\cbuilder6\Bin\dclite60.bpl=Borland Integrated Translation Environment
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=..\..\..\src\cpp\common;C:\Program Files\Borland\CBuilder6\Projects;C:\Program Files\Borland\CBuilder5\Projects;..\..\..\src\cpp\eddie;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\..\src\cpp\eddie;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=..\..\..\src\cpp\common;C:\Program Files\Borland\CBuilder6\Projects;C:\Program Files\Borland\CBuilder5\Projects;$(BCB)\Projects\Lib;..\..\..\src\cpp\eddie;$(BCB)\lib\obj;$(BCB)\lib
+Item1=$(BCB)\Projects\Lib;..\..\..\src\cpp\eddie;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\..\src\cpp\eddie;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=..\..\..\tmp\obj\eddie
+Item1=..\..\..\tmp\obj
+
+[HistoryLists\hlFinalOutputDir]
+Count=5
+Item0=..\..\..\dist\tools
+Item1=..\..\..\tmp\obj\eddie\
+Item2=..\..\..\tmp\obj\eddie
+Item3=..\..\..\tmp\obj\
+Item4=..\..\..\tmp\obj
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

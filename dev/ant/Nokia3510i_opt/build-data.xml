@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+
+<!-- DOCTYPE project [<!ENTITY site SYSTEM "../../../doc/site/dev/ant/xml/build_site.xml">] -->
+
+<project name="LethalMetal" default="usage" basedir="../../..">
+	<!-- data building consists of: 
+             *) sprites export (from dat to spr)
+	     *) maps
+	     *) sounds
+	     *) tileset
+	     *) linking some of the data files into one or more data libs, copy the others
+	        to the target directory
+	-->
+
+	<!-- ================================================== -->
+	<!--    Properties (Add your own properties here)       -->
+	<!-- ================================================== -->
+	<property name="dataset" value="Nokia3510i"/>
+	<property name="res.source.dir" value="data/${dataset}"/>
+	<property name="res.target.dir" value="res/${build.what}/jar"/>
+	<property name="sprite.dir" value="${res.source.dir}/sprites"/>
+	<property name="maps.dir" value="${res.source.dir}/maps"/>
+	<property name="sounds.dir" value="${res.source.dir}/sounds"/>
+	<property name="tileset.dir" value="${res.source.dir}/tileset"/>
+	<property name="strings.dir" value="${res.source.dir}/strings"/>
+	<property name="exported.dir" value="${res.source.dir}/exported"/>
+
+	<property name="xsprite.exe" value="${gametoolkit.dir}/xsprite.exe"/>
+	<property name="datagrowth.exe" value="${gametoolkit.dir}/datagrowth.exe"/>
+	<property name="StringTool.exe" value="${gametoolkit.dir}/StringTool.exe"/>
+	<property name="build.lang" value="${build.param2}" />
+	
+	<!-- ==================================== -->
+	<!--          Print a help line           -->
+	<!-- ==================================== -->
+	<target name="usage" description="Prints a help line">
+		<echo>Use 'build -projecthelp' to see a sumary of targets you can execute ...</echo>
+	</target>
+
+	<!-- ==================================== -->
+	<!--        Create needed folders         -->
+	<!-- and initialize the time variables    -->
+	<!-- ==================================== -->
+	<target name="datainit" description="Make all initializations">
+		<!-- you can get rid of the format tag if you only need -->
+		<!-- time initialization. Can be accessed with          -->
+		<!-- ${dstamp} and ${tstamp}                            -->
+		<tstamp>
+			<format property="cvs.time" pattern="yyyy-MM-dd hh:mm"/>
+		</tstamp>
+
+		<!-- mkdir dir="${res.dir}/${ant.project.name}"/ -->
+	</target>
+
+	<!-- ==================================== -->
+	<!--         Make all clean               -->
+	<!-- remove all build files and temporary -->
+	<!-- folders. Never fails if it cannot    -->
+	<!-- perform a deletion.                  -->
+	<!-- ==================================== -->
+	<target name="dataclean" description="Clean the data">
+		<delete includeemptydirs="true">
+			<fileset dir="${res.target.dir}" includes="**/*"/>
+		</delete>		  
+	</target>
+
+	<!-- ==================================== -->
+	<!--        Make the project data         -->
+	<!-- ==================================== -->
+	<target name="data" depends="init" description="Builds the data associated with the project">
+	<echo> Building data for ${ant.project.name}</echo>
+
+	<!-- ================================================== -->
+	<!--                 Export the sprites                 -->
+	<!-- ================================================== -->
+	<echo>Toolkit dir: ${gametoolkit.dir}</echo>
+	<echo>XSprite dir: ${xsprite.exe} ${res.source.dir}</echo>
+	<echo>Strings in language: ${build.lang} ../../${strings.dir}/bin_${build.lang}</echo>	
+	
+	<mkdir dir="${strings.dir}/bin_${build.lang}"/>
+		
+	<exec executable="${xsprite.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\sprites.txt ..\..\${exported.dir}\"></arg>
+	</exec>
+
+	<!-- ================================================== -->
+	<!--                 Export the strings                 -->
+	<!-- ================================================== -->
+	
+	<exec executable="${StringTool.exe}" dir="${gametoolkit.dir}">					
+		<arg line="-input ../../${strings.dir}/Strings_${build.lang}.xml -output ../../${strings.dir}/bin_${build.lang} -script StringScript_BinOff.csl"></arg>
+	</exec>
+
+	<!-- Copy the generated java files to sources -->
+	<copy todir="${java.src.dir}/engine" overwrite="true">
+		<fileset dir="${strings.dir}\bin_${build.lang}" includes="*.java"/>
+	</copy>
+
+	<copy todir="${exported.dir}" overwrite="true">
+		<fileset dir="${strings.dir}\bin_${build.lang}">
+		 <include name="*.BIN"/>
+		 <include name="*.OFF"/>
+		</fileset> 
+	</copy>
+	
+	<!-- ================================================== -->
+	<!--                  Build the libs                    -->
+	<!-- ================================================== -->
+	<exec executable="${datagrowth.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\data01.txt ..\..\${exported.dir}\01.data"></arg>
+	</exec>
+
+	<exec executable="${datagrowth.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\data02.txt ..\..\${exported.dir}\02.data"></arg>
+	</exec>
+
+	<exec executable="${datagrowth.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\data03.txt ..\..\${exported.dir}\03.data"></arg>
+	</exec>
+
+	<exec executable="${datagrowth.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\data04.txt ..\..\${exported.dir}\04.data"></arg>
+	</exec>
+
+	<exec executable="${datagrowth.exe}" dir="${gametoolkit.dir}">
+	<arg line="..\..\data\Nokia3510i\data05.txt ..\..\${exported.dir}\05.data"></arg>
+	</exec>
+	
+	<!-- ================================================================================ -->
+	<!-- Copy files to the project jar directory, to be avalable for dist/run/obfuscation -->
+	<!-- ================================================================================ -->
+
+	<!-- Copy data paks -->
+	<copy file="${exported.dir}/01.data" todir="${res.target.dir}" overwrite="true" />
+	<copy file="${exported.dir}/02.data" todir="${res.target.dir}" overwrite="true" />
+	<copy file="${exported.dir}/03.data" todir="${res.target.dir}" overwrite="true" />
+	<copy file="${exported.dir}/04.data" todir="${res.target.dir}" overwrite="true" />
+	<copy file="${exported.dir}/05.data" todir="${res.target.dir}" overwrite="true" />
+
+	<!-- Copy maps -->
+	<copy todir="${res.target.dir}" overwrite="true">
+		<fileset dir="${maps.dir}" includes="*.map"/>
+	</copy>
+
+	<!-- Copy sounds -->
+	<copy todir="${res.target.dir}" overwrite="true">
+		<fileset dir="${sounds.dir}" includes="*.nokia"/>
+	</copy>
+
+	<!-- Copy the tileset -->
+	<copy file="${tileset.dir}/tid4.dat16" todir="${res.target.dir}" overwrite="true" />
+
+	</target>
+</project>

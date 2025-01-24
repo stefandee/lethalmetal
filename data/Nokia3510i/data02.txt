@@ -1,0 +1,9 @@
+exported\drob.spr
+exported\tiles.spr
+exported\dtitle.spr
+exported\cursor.spr
+exported\mninja.spr
+exported\font.spr
+exported\boxbullets.spr
+exported\ibullets.spr
+exported\ihealth.spr

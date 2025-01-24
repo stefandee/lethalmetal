@@ -1,0 +1,16 @@
+exported\red_flame.spr
+exported\blink.spr
+exported\blue_flame.spr
+exported\bullet.spr
+exported\computer.spr
+exported\elevator.spr
+exported\explosie_mica.spr
+exported\health.spr
+exported\impact.spr
+exported\li01.spr
+exported\li02.spr
+exported\mine.spr
+exported\n.spr
+exported\r2arms.spr
+exported\r2body.spr
+exported\r2head.spr

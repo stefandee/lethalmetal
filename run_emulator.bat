@@ -1,0 +1,1 @@
+C:\Progra~1\Sdk\Nokia3510sdk\Nokia_3510i_MIDP_SDK_v1_0\bin\3510i_em.exe -parent_port 2810 -heapsize 280000 -classpath "C:\Progra~1\Sdk\Nokia3510sdk\Nokia_3510i_MIDP_SDK_v1_0\lib\classes.zip;E:\Home\Karg\CyberNinja\dist\jad\CyberNinja.jar" "E:\Home\Karg\CyberNinja/dist/jad/CyberNinja.jad"

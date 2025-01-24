@@ -1,0 +1,1 @@
+build.bat data Nokia3510i_opt LethalMetal EN

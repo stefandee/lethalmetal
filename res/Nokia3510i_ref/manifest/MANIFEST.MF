@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+MIDlet-Name: Lethal Metal
+MIDlet-1: LethalMetal,/game.png,main.MainMIDlet 
+MIDlet-Icon: /game.png
+MIDlet-Version: 0.0.1
+MIDlet-Vendor: Start Small Inc.
+MicroEdition-Configuration: CLDC-1.0
+MicroEdition-Profile: MIDP-1.0
+Created-By: Karg

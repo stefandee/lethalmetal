@@ -1,0 +1,9 @@
+MIDlet-1: LethalMetal,/game.png,main.MainMIDlet
+MIDlet-Icon: /game.png
+MIDlet-Jar-Size: 0
+Nokia-MIDlet-Category: Game
+MIDlet-Jar-URL: LethalMetal.jar
+MIDlet-Description: Jump and Run Game
+MIDlet-Name: Lethal Metal
+MIDlet-Vendor: Start Small Inc.
+MIDlet-Version: 1.0

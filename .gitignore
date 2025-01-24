@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# C++ Builder related files
+*.tds
+*.obj
+*.~*
+*.dsk
+*.bak
+
+# JB8 related files
+*.local
+
+# Folders with temporary/generated data
+.releases/
+tmp/
+dist/
+data/Nokia3510i/exported/
+data/Nokia3510i/strings/bin_EN
+data/Nokia3510i/strings/bin_FR

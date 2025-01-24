@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+
+<!-- DOCTYPE project [<!ENTITY site SYSTEM "../../../doc/site/dev/ant/xml/build_site.xml">] -->
+
+<project name="LethalMetal" default="usage" basedir="../../..">
+	<!-- This is the place to include the site build configuration. -->
+	<!-- property name="site.base.dir" value="doc/site/"/ -->
+	<!-- &site; -->
+
+	<!-- This is the place to include SDK specific zips or jars.  -->
+	<!-- Also, put here the paths that are specific to your dev   -->
+	<!-- environment.                                             -->
+	<!-- ( the rest of the build file should be left untouched ;) -->
+	<property name="SDK_HOME.dir" value="C:\Sdk\Nokia_3510i_MIDP_SDK_v1_0" />
+	<property name="wtk.home" value="C:\Sdk\WTK21"/>
+	<property name="wtk.midp.version" value="1.0" />
+	<property name="wtk.cldc.version" value="1.0" />
+	<property name="wtk.midpapi" value="${SDK_HOME.dir};${SDK_HOME.dir}/bin"/>
+	<property name="project.classpath" value = "${SDK_HOME.dir}/lib/classes.zip;${wtk.home}/lib/cldcapi10.jar"/>
+
+	<!-- ================================================== -->
+	<!--    Properties (Add your own properties here)       -->
+	<!-- ================================================== -->
+	<property name="build.dir" value="tmp/${build.what}"/>
+	<property name="build.lib.dir" value="${build.dir}/lib"/>
+	<property name="build.obj.dir" value="tmp/obj"/>		
+	<property name="build.class.dir" value="${build.dir}/classes"/>
+	<property name="build.preverified.dir" value="${build.dir}/preverified"/>
+	<property name="build.post.preverified.dir" value="${build.dir}/post-preverified"/>
+	<property name="build.test.dir" value="${build.dir}/test-classes"/>
+	<property name="build.test.report.dir" value="${build.dir}/test-results"/>
+	<property name="build.logs.dir" value="${build.dir}/logs" />
+	<property name="build.tmp.dir" value="${build.dir}/tmp" />
+	<property name="build.preprocess.dir" value="${build.dir}/preprocess" />
+	<property name="java.src.dir" value="src/java/${build.what}"/>
+	<property name="xml.src.dir" value="src/xml"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="gametoolkit.dir" value="${lib.dir}/gametoolkit"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="dist.jad.dir" value="${dist.dir}/jad"/>
+	<property name="res.dir" value="res/${build.what}"/>
+	<property name="res.jad.dir" value="${res.dir}/jad"/>
+	<property name="base.name" value="${ant.project.name}_base"/>
+	<property name="dist.name" value="${ant.project.name}_${build.what}"/>
+	<property name="obfuscated.name" value="${ant.project.name}_obfuscated"/>
+	<property name="version.file" value="dev/ant/${build.what}/version.properties" />
+	<property name="main.file" value="dev/ant/${build.what}/main.properties" />
+
+	<!-- ================================================== -->
+	<!--    Tasks (Add your own properties here)            -->
+	<!-- ================================================== -->
+
+	<!-- Antenna is a midp oriented build tool -->
+	<taskdef classpath="${lib.dir}/antenna/antenna-bin-0.9.13.jar" resource="antenna.properties"/>
+
+	<!-- ProGuard is the obfuscator (produce smaller jars than jshrink, retroguard, yguard) -->
+	<taskdef resource="proguard/ant/task.properties" classpath="${lib.dir}/proguard/proguard.jar" />
+
+	<import file="build-data.xml" />
+
+	<!-- ==================================== -->
+	<!--          Print a help line           -->
+	<!-- ==================================== -->
+	<target name="usage" description="Print a help line">
+		<echo>Use 'build -projecthelp' to see a sumary of targets you can execute ...</echo>
+	</target>
+
+	<!-- ==================================== -->
+	<!--        Create needed folders         -->
+	<!-- and initialize the time variables    -->
+	<!-- ==================================== -->
+	<target name="init" description="Make all initializations">
+		<!-- you can get rid of the format tag if you only need -->
+		<!-- time initialization. Can be accessed with          -->
+		<!-- ${dstamp} and ${tstamp}                            -->
+
+		<echo> Ant + Antenna Build System by Karg </echo>
+		<echo> ${ant.version} </echo>
+
+		<tstamp>
+			<format property="cvs.time" pattern="yyyy-MM-dd hh:mm"/>
+		</tstamp>
+
+		<mkdir dir="${build.lib.dir}"/>
+		<mkdir dir="${build.class.dir}"/>
+		<mkdir dir="${build.preverified.dir}"/>
+		<mkdir dir="${build.post.preverified.dir}"/>
+		<mkdir dir="${build.test.dir}"/>
+		<mkdir dir="${build.test.report.dir}"/>
+		<mkdir dir="${build.logs.dir}"/>
+		<mkdir dir="${build.tmp.dir}"/>
+		<mkdir dir="${build.preprocess.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.jad.dir}"/>
+
+		<echo> Building version for ${build.what} </echo>
+	</target>
+
+	<!-- ==================================== -->
+	<!--         Make all clean               -->
+	<!-- remove all build files and temporary -->
+	<!-- folders. Never fails if it cannot    -->
+	<!-- perform a deletion.                  -->
+	<!-- ==================================== -->
+	<target name="clean" description="Make all clean">
+		<delete includeemptydirs="true">
+			<!-- fileset dir="${dist.dir}" includes="**/*"/ -->
+			<fileset dir="${build.class.dir}" includes="**/*"/>
+			<fileset dir="${build.preverified.dir}" includes="**/*"/>
+			<fileset dir="${build.post.preverified.dir}" includes="**/*"/>
+			<fileset dir="${build.tmp.dir}" includes="**/*"/>
+			<fileset dir="${build.logs.dir}" includes="**/*"/>
+			<fileset dir="${build.lib.dir}" includes="**/*"/>
+			<fileset dir="${build.preprocess.dir}" includes="**/*"/>
+		</delete>		  
+	</target>
+
+	<!-- ==================================== -->
+	<!--        Set the project properties    -->
+	<!-- ==================================== -->
+	<target name="properties" description="Sets the project properties: public name, language; eg build properties projectname PUBLICNAME LANGUAGE">		
+		<echo file="${main.file}" append="false">public.name=${build.param1}${line.separator}</echo>
+		<echo file="${main.file}" append="true">lang=${build.param2}${line.separator}</echo>
+	</target>
+
+	<!-- ==================================== -->
+	<!--        Compile the Project           -->
+	<!-- ==================================== -->
+	<target name="compile" depends="init" description="Compile the Project">
+		<wtkbuild srcdir="${java.src.dir}" 
+		       destdir="${build.class.dir}" 
+		       debug="off" 
+		       optimize="on"
+                       classpath="${project.classpath}" 
+		       preverify="false"
+		       target="1.4"
+		       source="1.4"
+		       />		       
+	</target>
+
+	<!-- ======================================= -->
+	<!--        Preverify the Project            -->
+	<!-- (otherwise it wont run on emu or device -->
+	<!-- TODO: more tuning over bootclasspath    -->
+	<!-- ======================================= -->
+	<target name="preverify" depends="compile">		
+		<wtkpreverify srcdir="${build.class.dir}" 
+			destdir="${build.preverified.dir}"
+			 bootclasspath="${SDK_HOME.dir}\lib;${SDK_HOME.dir}\bin;${SDK_HOME.dir}\lib\classes.zip"
+			 cldc="true"
+			/>	
+        </target>
+
+	<!-- ==================================== -->
+	<!--          Builds base distribution    -->
+	<!-- ==================================== -->
+	<target name="base.dist" depends="preverify" description="Builds the base distribution. This is an internal target, use dist or obfuscate instead.">
+
+		<!-- Read the version from the file. The version must be modified manually, for now -->
+		<property file="${version.file}" />
+
+		<!-- copy the manifest file and modify it before stuffing it in the jar -->
+		<copy file="${res.dir}/manifest/Manifest.mf" tofile="${build.lib.dir}/Manifest.mf" overwrite="true"/>
+
+		<!-- TODO: add version reading from property file and update manifest and jad -->
+		<exec executable="${gametoolkit.dir}/JadUpdate.exe" dir="${build.lib.dir}/">
+		<arg line="-jad Manifest.mf -v ${version.major}.${version.minor}.${version.micro}"></arg>
+		</exec>		
+
+		<jar jarfile="${build.lib.dir}/${base.name}.jar" manifest="${build.lib.dir}/Manifest.mf">
+			<fileset dir="${build.preverified.dir}"/>
+			<fileset dir="${res.dir}/jar"/>
+		</jar>
+
+		<copy file="${res.jad.dir}/${ant.project.name}.jad" tofile="${build.lib.dir}/${base.name}.jad" overwrite="true" />
+		<wtkjad jadfile="${build.lib.dir}/${base.name}.jad" jarfile="${build.lib.dir}/${base.name}.jar" update="true" version="${version.major}.${version.minor}.${version.micro}"/>
+	</target>
+
+	<!-- ==================================== -->
+	<!--          Builds distribution         -->
+	<!-- ==================================== -->
+	<target name="dist" depends="base.dist" description="Builds the distribution (not obfuscated) for this project.">
+
+		<!-- Read the public.name from the file. The public name should have been set using build publicname dev_name desired_publicname, eg build publicname triplets V600 -->
+		<property file="${main.file}"/>
+
+		<!-- Read the version from the file. The version must be modified manually, for now -->
+		<property file="${version.file}" />
+
+		<copy file="${build.lib.dir}/${base.name}.jad" tofile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jad" overwrite="true"/>
+		<copy file="${build.lib.dir}/${base.name}.jar" tofile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jar" overwrite="true"/>
+		<wtkjad jadfile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jad" jarfile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jar" update="true"/>
+	</target>
+
+	<!-- ========================================= -->
+	<!--        Run the distribution               -->
+	<!-- ========================================= -->
+	<target name="run" depends="dist" description="Runs the not-obfuscated distribution">
+		<echo>Hello. ${ant.project.name} is about to start...</echo>
+
+		<!-- Read the public.name from the file. -->
+		<property file="${main.file}"/>
+
+		<!-- Read the version from the file. -->
+		<property file="${version.file}" />
+
+		<exec executable="${SDK_HOME.dir}/bin/3510i_em.exe">
+		<arg line="-heapsize 300000 -classpath ${SDK_HOME.dir} -jad ${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jad"></arg>
+		</exec>
+	</target>
+
+	<!-- =============================================== -->
+	<!--          Builds obfuscated distribution         -->
+	<!-- =============================================== -->
+	<target name="obfuscate" depends="base.dist" description="Creates an obfuscated distribution (requires proguard) and setting the public name from the file">
+		<proguard>
+			-libraryjars ${project.classpath}
+			-injars      ${build.lib.dir}/${base.name}.jar
+			-outjars     ${build.lib.dir}/${obfuscated.name}.jar     
+			-printseeds
+			-overloadaggressively
+			-defaultpackage ''
+			-dontusemixedcaseclassnames
+			-allowaccessmodification
+			-keep public class * extends javax.microedition.midlet.MIDlet
+			-dontnote
+		</proguard>
+
+		<delete dir="${build.post.preverified.dir}"/>
+		<mkdir dir="${build.post.preverified.dir}"/>
+		<delete dir="${build.tmp.dir}"/>
+		<mkdir dir="${build.tmp.dir}"/>
+		<unjar src="${build.lib.dir}/${obfuscated.name}.jar" dest="${build.tmp.dir}" />
+		<exec executable="${SDK_HOME.dir}\bin\preverify.exe">
+	          <arg line="-classpath '&quot;'${project.classpath}'&quot;' -d '&quot;'${build.tmp.dir}'&quot;' '&quot;'${build.tmp.dir}'&quot;'" />
+		</exec>
+		<exec executable="${lib.dir}/kzip/kzip.exe" dir="${build.tmp.dir}/">
+		<arg line="/r ${obfuscated.name}.jar *.*"></arg>
+		</exec>
+
+		<!-- Read the public.name from the file. The public name should have been set using build publicname dev_name desired_publicname, eg build publicname triplets V600 -->
+		<property file="${main.file}"/>
+		
+		<!-- Read the version from the file. -->
+		<property file="${version.file}" />
+
+		<copy file="${build.lib.dir}/${base.name}.jad" tofile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jad" overwrite="true"/>
+		<copy file="${build.tmp.dir}/${obfuscated.name}.jar" tofile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jar" overwrite="true"/>
+		<wtkjad jadfile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jad" jarfile="${dist.jad.dir}/${ant.project.name}_${public.name}_${lang}_${version.major}${version.minor}${version.micro}.jar" update="true" />
+	</target>
+
+	<!-- =============================================== -->
+	<!--          These targets still need more tuning   -->
+	<!-- =============================================== -->
+
+	<!-- =============================================== -->
+	<!--          Builds a release                       -->
+	<!-- =============================================== -->
+	<target name="release" depends="obfuscate" description="Builds a release - obfuscated and version-updated jad file">
+		<wtkjad jadfile="${dist.jad.dir}/${ant.project.name}.jad" jarfile="${dist.jad.dir}/${ant.project.name}.jar" update="true" autoversion="true"/>
+	</target>
+        
+    <!-- ==================================== -->
+    <!--  Run the distribution in debug mode  -->
+    <!-- ==================================== -->
+    <target name="debug" depends="base.dist" description="Run the distribution in debug mode">
+		<echo>Hello</echo>
+        <java classname="com.nokia.phone.sdk.Emulator" fork="yes">
+          <classpath>
+            <pathelement location="${lib.dir}/emulator.jar"/>
+          </classpath>
+          <jvmarg value="-Demulator.home=${sdk_home.dir}"/>
+          <arg line="-debugger -dbg_port 3000 -jad ${basedir}/${dist.dir}/jad/${ant.project.name}.jad"/>
+        </java>
+    </target>
+</project>
