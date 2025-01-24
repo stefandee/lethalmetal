@@ -90,6 +90,12 @@ Some more levels (another 5 would be cool).
 More ports, with MIDP1.0 and MIDP2.0 functionalities.
 Sounds.
 
+## Media
+![Cyber Ninja running in 6320 emulator](.media/cn_on_6320_emu.png "Cyber Ninja running in 6320 emulator")
+![A funny bug](.media/tehfunnybug.png "Shooting over my head, always")
+![Cyber Ninja Gameplay Video 1](.media/cyberninja_gameplay001.avi "Gameplay")
+![Cyber Ninja Gameplay Video 2](.media/cyberninja_gameplay002.avi "Gameplay")
+
 ## Licenses
 
 Code license:
