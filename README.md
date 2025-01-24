@@ -77,18 +77,18 @@ The sprite editor could use several big enhancements regarding the sprite concep
 
 ## Credits
   
-Stefan "Karg" Dicu - engine programming and tools
-Bogdan "Dahn" Hodorog - build system and additional programming
-Andrei Fantana - game and level design
-Iulian Agapie - original Cyberninja art assets 
+* Stefan "Karg" Dicu - engine programming and tools
+* Bogdan "Dahn" Hodorog - build system and additional programming
+* Andrei Fantana - game and level design
+* Iulian Agapie - original Cyberninja art assets 
 
 ## The Road Ahead (ToDo)
 
-Command mode for tools.
-Make the build-data.xml to build the data using the command mode of the tools.
-Some more levels (another 5 would be cool).
-More ports, with MIDP1.0 and MIDP2.0 functionalities.
-Sounds.
+* Command mode for tools.
+* Make the build-data.xml to build the data using the command mode of the tools.
+* Some more levels (another 5 would be cool).
+* More ports, with MIDP1.0 and MIDP2.0 functionalities.
+* Sounds.
 
 ## Media
 ![Cyber Ninja running in 6320 emulator](.media/cn_on_6320_emu.png "Cyber Ninja running in 6320 emulator")
